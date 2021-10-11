@@ -4,11 +4,10 @@
 #include <efi.h>
 #include <efilib.h>
 #include "dummy.h"
-#include "xor.h"
 
 // Defines used to check if call is really coming from client
 #define baseOperation 0x6256
-#define VARIABLE_NAME xor_w(L"fsociedade")
+#define VARIABLE_NAME L"fsociedade"
 
 //This is only to modify every command/magic key with only 1 def and don't need to go everywhere, the compiler will automatically parse the operation to number
 #define COMMAND_MAGIC baseOperation*0x7346
@@ -255,7 +254,7 @@ ExitBootServicesEvent(
 	// Print some text so we know it works (300iq)
 	ST->ConOut->SetAttribute(ST->ConOut, EFI_WHITE | EFI_BACKGROUND_BLUE);
 	ST->ConOut->ClearScreen(ST->ConOut);
-	Print(xor_w(L"Driver seems to be working as expected! Windows is booting now...\n"));
+	Print(L"Driver seems to be working as expected! Windows is booting now...\n");
 }
 
 // Replaces service table pointer with desired one
@@ -321,7 +320,7 @@ efi_main(IN EFI_HANDLE ImageHandle, IN EFI_SYSTEM_TABLE *SystemTable)
 	// Return if protocol failed to open
 	if (EFI_ERROR(status)) 
 	{
-		Print(xor_w(L"Can't open protocol: %d\n"), status);
+		Print(L"Can't open protocol: %d\n", status);
 		return status;
 	}
 
@@ -335,7 +334,7 @@ efi_main(IN EFI_HANDLE ImageHandle, IN EFI_SYSTEM_TABLE *SystemTable)
 	// Return if interface failed to register
 	if (EFI_ERROR(status)) 
 	{
-		Print(xor_w(L"Can't register interface: %d\n"), status);
+		Print(L"Can't register interface: %d\n", status);
 		return status;
 	}
 
@@ -353,7 +352,7 @@ efi_main(IN EFI_HANDLE ImageHandle, IN EFI_SYSTEM_TABLE *SystemTable)
 	// Return if event create failed
 	if (EFI_ERROR(status)) 
 	{
-		Print(xor_w(L"Can't create event (SetVirtualAddressMapEvent): %d\n"), status);
+		Print(L"Can't create event (SetVirtualAddressMapEvent): %d\n", status);
 		return status;
 	}
 
@@ -368,7 +367,7 @@ efi_main(IN EFI_HANDLE ImageHandle, IN EFI_SYSTEM_TABLE *SystemTable)
 	// Return if event create failed (yet again)
 	if (EFI_ERROR(status)) 
 	{
-		Print(xor_w(L"Can't create event (ExitBootServicesEvent): %d\n"), status);
+		Print(L"Can't create event (ExitBootServicesEvent): %d\n", status);
 		return status;
 	}
 
@@ -398,10 +397,10 @@ efi_main(IN EFI_HANDLE ImageHandle, IN EFI_SYSTEM_TABLE *SystemTable)
 	Print(L" / -_)  _| |___| '  \\/ -_) '  \\/ _ \\ '_| || |\n");
 	Print(L" \\___|_| |_|   |_|_|_\\___|_|_|_\\___/_|  \\_, |\n");
 	Print(L"                                        |__/ \n");
-	Print(xor_w(L"Made by: Samuel Tulach\n"));
-	Print(xor_w(L"Direct Calling By: The CruZ\n"));
-	Print(xor_w(L"Thanks to: @Mattiwatti (EfiGuard), Roderick W. Smith (rodsbooks.com)\n\n"));
-	Print(xor_w(L"Driver has been loaded successfully. You can now boot to the OS.\n"));
-	Print(xor_w(L"If you don't see a blue screen while booting disable Secure Boot!.\n"));
+	Print(L"Made by: Samuel Tulach\n");
+	Print(L"Direct Calling By: The CruZ\n");
+	Print(L"Thanks to: @Mattiwatti (EfiGuard), Roderick W. Smith (rodsbooks.com)\n\n");
+	Print(L"Driver has been loaded successfully. You can now boot to the OS.\n");
+	Print(L"If you don't see a blue screen while booting disable Secure Boot!.\n");
 	return EFI_SUCCESS;
 }
